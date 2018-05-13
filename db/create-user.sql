@@ -1,4 +1,4 @@
-CREATE TABLE f_company (
+CREATE TABLE f_user (
   uuid uuid primary key default uuid_generate_v4(),
   name varchar(80) NOT NULL,
   street varchar(80) NOT NULL,
