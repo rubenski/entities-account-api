@@ -24,6 +24,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/company", method = RequestMethod.PUT)
     public CompanyForm saveOrUpdate(@Valid @RequestBody CompanyForm company) {
-        return companyService.create(company);
+        companyService.create(company);
+        return company;
     }
 }

@@ -11,9 +11,7 @@ public class CompanyService {
         this.companyDao = companyDao;
     }
 
-    public CompanyForm create(CompanyForm companyForm) {
-        String uuid = companyDao.insert(companyForm);
-        companyForm.setUuid(uuid);
-        return companyForm;
+    public void create(CompanyForm companyForm) {
+        companyDao.insert(companyForm);
     }
 }
