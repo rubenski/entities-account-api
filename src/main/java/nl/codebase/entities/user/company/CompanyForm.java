@@ -20,7 +20,7 @@ public class CompanyForm {
     private String commerceNumber;
     @Pattern(regexp = "[A-Z]{3}+")
     private String country;
-    @Pattern(regexp = "[\\d\\w\\s!?-_@%&+./]{4,40}")
+    @Pattern(regexp = "[\\d\\w._-]{2,40}(\\.[\\w]{2,3}){1,2}")
     private String website;
 
     public Integer getId() {
