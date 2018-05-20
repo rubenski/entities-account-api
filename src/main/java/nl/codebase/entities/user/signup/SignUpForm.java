@@ -1,25 +1,39 @@
-package nl.codebase.entities.user.company;
+package nl.codebase.entities.user.signup;
 
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Setter
-public class CompanyForm {
+public class SignUpForm {
 
     private Integer id;
+
+    @NotNull
     @Pattern(regexp = "[\\d\\w\\s!?-_@%&+.]+")
     private String name;
+
+    @NotNull
     @Pattern(regexp = "[\\d\\w\\s!?-_@%&+.]{2,40}")
     private String street;
+
+    @NotNull
     @Pattern(regexp = "[\\d\\w\\s]{3,40}")
     private String number;
+
+    @NotNull
     @Pattern(regexp = "[\\d\\w\\s]{4,10}")
     private String zip;
-    @Pattern(regexp = "[\\d\\w\\s.#-]{4,40}")
+
+    @NotNull
+    @Pattern(regexp = "[\\d\\w.#-]{4,40}")
     private String commerceNumber;
+
+    @NotNull
     @Pattern(regexp = "[A-Z]{3}+")
     private String country;
+
     @Pattern(regexp = "[\\d\\w._-]{2,40}(\\.[\\w]{2,3}){1,2}")
     private String website;
 
