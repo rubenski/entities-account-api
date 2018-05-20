@@ -1,4 +1,4 @@
-package nl.codebase.entities.user.company;
+package nl.codebase.entities.user.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -25,16 +25,15 @@ public class CompanyDao extends JdbcDaoSupport {
         setDataSource(dataSource);
     }
 
-    public void insert(CompanyForm companyForm) {
+    public void insert(SignUpForm signUpForm) {
         getJdbcTemplate().update(SQL_INSERT_COMPANY, preparedStatement -> {
-            preparedStatement.setString(1, companyForm.getName());
-            preparedStatement.setString(2, companyForm.getStreet());
-            preparedStatement.setString(3, companyForm.getNumber());
-            preparedStatement.setString(4, companyForm.getZip());
-            preparedStatement.setString(5, companyForm.getCommerceNumber());
-            preparedStatement.setString(6, companyForm.getCountry());
-            preparedStatement.setString(7, companyForm.getWebsite());
+            preparedStatement.setString(1, signUpForm.getName());
+            preparedStatement.setString(2, signUpForm.getStreet());
+            preparedStatement.setString(3, signUpForm.getNumber());
+            preparedStatement.setString(4, signUpForm.getZip());
+            preparedStatement.setString(5, signUpForm.getCommerceNumber());
+            preparedStatement.setString(6, signUpForm.getCountry());
+            preparedStatement.setString(7, signUpForm.getWebsite());
         });
     }
-
 }
