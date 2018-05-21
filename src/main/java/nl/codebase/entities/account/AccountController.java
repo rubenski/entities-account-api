@@ -20,7 +20,7 @@ public class AccountController {
         this.accountDao = accountDao;
     }
 
-    @PreAuthorize(value = "hasAuthority('STANDARD_USER')")
+    // TODO: This should never be exposed to the internet!!!
     @RequestMapping(value = "/{email}", method = RequestMethod.GET)
     public ResponseEntity<Account> findAccount(@PathParam("email") String email) {
         Optional<Account> accountOptional = accountDao.findByEmail(email);
