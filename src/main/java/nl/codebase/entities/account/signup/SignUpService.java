@@ -1,4 +1,4 @@
-package nl.codebase.entities.user.signup;
+package nl.codebase.entities.account.signup;
 
 import nl.codebase.entities.common.FaceterConstants;
 import nl.codebase.entities.common.account.Grants;

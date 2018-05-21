@@ -1,4 +1,4 @@
-package nl.codebase.entities.user.signup;
+package nl.codebase.entities.account.signup;
 
 import lombok.Getter;
 import lombok.Setter;

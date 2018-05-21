@@ -1,11 +1,11 @@
-package nl.codebase.entities.user.signup;
+package nl.codebase.entities.account.signup;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import nl.codebase.entities.common.account.Grants;
-import nl.codebase.entities.user.UserApiException;
+import nl.codebase.entities.account.UserApiException;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.AssertTrue;

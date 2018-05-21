@@ -1,4 +1,4 @@
-package nl.codebase.entities.user.signup;
+package nl.codebase.entities.account.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

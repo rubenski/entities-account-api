@@ -1,4 +1,4 @@
-package nl.codebase.entities.user;
+package nl.codebase.entities.account;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.codebase.entities.common.filter.CsrfTokenValidatorFilter;

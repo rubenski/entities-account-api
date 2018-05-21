@@ -1,4 +1,4 @@
-package nl.codebase.entities.user;
+package nl.codebase.entities.account;
 
 public class UserApiException extends RuntimeException {
 }

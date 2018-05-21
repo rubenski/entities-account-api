@@ -1,4 +1,4 @@
-package nl.codebase.entities.user;
+package nl.codebase.entities.account;
 
 import nl.codebase.entities.common.filter.CsrfTokenResponseFilter;
 import nl.codebase.entities.common.filter.TokenFromCookieToHeaderFilter;

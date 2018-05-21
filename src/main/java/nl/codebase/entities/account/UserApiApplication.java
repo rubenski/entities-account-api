@@ -1,4 +1,4 @@
-package nl.codebase.entities.user;
+package nl.codebase.entities.account;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootApplication
-@ComponentScan(value = {"nl.codebase.entities.user", "nl.codebase.entities.common.spring"})
+@ComponentScan(value = {"nl.codebase.entities.account", "nl.codebase.entities.common.spring"})
 public class UserApiApplication {
 
     public static void main(String[] args) {
