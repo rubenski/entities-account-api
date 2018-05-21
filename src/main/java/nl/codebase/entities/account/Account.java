@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import nl.codebase.entities.common.account.Grants;
-import nl.codebase.entities.account.UserApiException;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.AssertTrue;
@@ -58,7 +57,7 @@ public class Account {
         try {
             return OBJECT_MAPPER.writer().writeValueAsString(grants);
         } catch (JsonProcessingException e) {
-            throw new UserApiException();
+            throw new AccountApiException();
         }
     }
 
