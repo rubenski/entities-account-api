@@ -1,5 +1,6 @@
 package nl.codebase.entities.user.signup;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -8,13 +9,15 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class AccountDao extends JdbcDaoSupport {
+
 
     private final DataSource dataSource;
 
     private static final String SQL_FIND_ACCOUNT_BY_EMAIL = "SELECT * FROM f_account WHERE email = ?";
-    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, enabled, locked, company_id) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, enabled, locked, company_id, grants) VALUES (?,?,?,?,?,?,?,?,?)";
 
     @Autowired
     public AccountDao(DataSource dataSource) {
@@ -55,6 +58,7 @@ public class AccountDao extends JdbcDaoSupport {
             preparedStatement.setBoolean(6, account.isEnabled());
             preparedStatement.setBoolean(7, account.isLocked());
             preparedStatement.setInt(8, companyId);
+            preparedStatement.setString(9, account.grantsAsString());
         });
     }
 }

@@ -7,7 +7,8 @@ CREATE TABLE f_account (
   phone varchar(20) NOT NULL,
   expired boolean DEFAULT false,
   enabled boolean DEFAULT false,
-  locked boolean DEFAULT false
+  locked boolean DEFAULT false,
+  grants varchar(200) NOT NULL
 );
 
 CREATE INDEX f_account_email ON f_account (email);

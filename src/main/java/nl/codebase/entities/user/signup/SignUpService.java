@@ -1,5 +1,7 @@
 package nl.codebase.entities.user.signup;
 
+import nl.codebase.entities.common.FaceterConstants;
+import nl.codebase.entities.common.account.Grants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +26,9 @@ public class SignUpService {
 
     @Transactional
     public void signUp(SignUpForm signUpForm) {
-        int insertId = companyDao.insert(signUpForm.getCompany());
-        accountDao.insert(signUpForm.getAccount(), insertId);
+        int companyId = companyDao.insert(signUpForm.getCompany());
+        signUpForm.getAccount().setGrants(Grants.from(FaceterConstants.GRANT.COMPANY_USER));
+        accountDao.insert(signUpForm.getAccount(), companyId);
     }
 
     public Optional<Account> findAccountByEmail(String email) {
