@@ -1,14 +1,11 @@
 package nl.codebase.entities.account.signup;
 
-import nl.codebase.entities.account.Account;
 import nl.codebase.entities.account.AccountDao;
 import nl.codebase.entities.common.FaceterConstants;
 import nl.codebase.entities.common.account.Grants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 public class SignUpService {
@@ -33,8 +30,6 @@ public class SignUpService {
         accountDao.insert(signUpForm.getAccount(), companyId);
     }
 
-    public Optional<Account> findAccountByEmail(String email) {
-        return accountDao.findByEmail(email);
-    }
+
 
 }
