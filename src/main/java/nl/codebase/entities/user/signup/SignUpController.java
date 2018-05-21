@@ -25,10 +25,10 @@ public class SignUpController {
         return new SignUpForm();
     }
 
-    @RequestMapping(value = "/company", method = RequestMethod.PUT)
-    public SignUpForm saveOrUpdate(@Valid @RequestBody SignUpForm company) {
-        signUpService.signUp(company);
-        return company;
+    @RequestMapping(value = "/signup", method = RequestMethod.PUT)
+    public SignUpForm saveOrUpdate(@Valid @RequestBody SignUpForm signUpForm) {
+        signUpService.signUp(signUpForm);
+        return signUpForm;
     }
 
     @RequestMapping(value = "/exists", method = RequestMethod.POST)

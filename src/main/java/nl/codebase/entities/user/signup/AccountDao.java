@@ -14,6 +14,7 @@ public class AccountDao extends JdbcDaoSupport {
     private final DataSource dataSource;
 
     private static final String SQL_FIND_ACCOUNT_BY_EMAIL = "SELECT * FROM f_account WHERE email = ?";
+    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, enabled, locked, company_id) VALUES (?,?,?,?,?,?,?,?)";
 
     @Autowired
     public AccountDao(DataSource dataSource) {
@@ -44,8 +45,16 @@ public class AccountDao extends JdbcDaoSupport {
         });
     }
 
-    public void insert(SignUpForm signUpForm) {
-
-
+    public void insert(Account account, int companyId) {
+        getJdbcTemplate().update(SQL_INSERT_ACCOUNT, preparedStatement -> {
+            preparedStatement.setString(1, account.getFirstName());
+            preparedStatement.setString(2, account.getLastName());
+            preparedStatement.setString(3, account.getEmail());
+            preparedStatement.setString(4, account.getPhone());
+            preparedStatement.setBoolean(5, account.isExpired());
+            preparedStatement.setBoolean(6, account.isEnabled());
+            preparedStatement.setBoolean(7, account.isLocked());
+            preparedStatement.setInt(8, companyId);
+        });
     }
 }

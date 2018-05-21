@@ -24,8 +24,8 @@ public class SignUpService {
 
     @Transactional
     public void signUp(SignUpForm signUpForm) {
-        companyDao.insert(signUpForm);
-        accountDao.insert(signUpForm);
+        int insertId = companyDao.insert(signUpForm.getCompany());
+        accountDao.insert(signUpForm.getAccount(), insertId);
     }
 
     public Optional<Account> findAccountByEmail(String email) {
