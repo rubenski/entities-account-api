@@ -1,5 +1,7 @@
 package nl.codebase.entities.account.signup;
 
+import nl.codebase.entities.account.Account;
+import nl.codebase.entities.account.AccountDao;
 import nl.codebase.entities.common.FaceterConstants;
 import nl.codebase.entities.common.account.Grants;
 import org.springframework.beans.factory.annotation.Autowired;

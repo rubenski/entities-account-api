@@ -1,6 +1,7 @@
-package nl.codebase.entities.account.signup;
+package nl.codebase.entities.account;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.codebase.entities.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;

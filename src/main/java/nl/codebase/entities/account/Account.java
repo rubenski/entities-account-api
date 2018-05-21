@@ -1,4 +1,4 @@
-package nl.codebase.entities.account.signup;
+package nl.codebase.entities.account;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
