@@ -19,12 +19,6 @@ public class SignUpController {
         this.signUpService = signUpService;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('COMPANY_USER')")
-    @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
-    public SignUpForm get(@PathVariable("id") String id) {
-        return new SignUpForm();
-    }
-
     @RequestMapping(value = "/signup", method = RequestMethod.PUT)
     public SignUpForm saveOrUpdate(@Valid @RequestBody SignUpForm signUpForm) {
         signUpService.signUp(signUpForm);
