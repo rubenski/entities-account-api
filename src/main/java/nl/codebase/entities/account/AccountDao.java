@@ -18,7 +18,8 @@ public class AccountDao extends JdbcDaoSupport {
     private final DataSource dataSource;
 
     private static final String SQL_FIND_ACCOUNT_BY_EMAIL = "SELECT * FROM f_account WHERE email = ?";
-    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, enabled, locked, company_id, grants) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, " +
+            "enabled, locked, company_id, grants, password) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     @Autowired
     public AccountDao(DataSource dataSource) {
@@ -44,6 +45,10 @@ public class AccountDao extends JdbcDaoSupport {
             account.setFirstName(rs.getString("firstName"));
             account.setLastName(rs.getString("lastName"));
             account.setLocked(rs.getBoolean("locked"));
+            account.setPhone(rs.getString("phone"));
+            account.grantsFromString(rs.getString("grants"));
+            account.setPassword(rs.getString("password"));
+            account.setConfirmPassword(rs.getString("password"));
 
             return Optional.of(account);
         });
@@ -59,7 +64,8 @@ public class AccountDao extends JdbcDaoSupport {
             preparedStatement.setBoolean(6, account.isEnabled());
             preparedStatement.setBoolean(7, account.isLocked());
             preparedStatement.setInt(8, companyId);
-            preparedStatement.setString(9, account.grantsAsString());
+            preparedStatement.setString(9, account.grantsToString());
+            preparedStatement.setString(10, account.getPassword());
         });
     }
 }

@@ -4,15 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.codebase.entities.common.account.Account;
 import org.hibernate.validator.constraints.Email;
+import org.postgresql.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+import java.nio.charset.Charset;
 import java.util.Optional;
 
 @RestController
@@ -27,8 +25,9 @@ public class AccountController {
 
     // TODO: secure this with mutual TLS: https://stackoverflow.com/questions/33808603/implementing-2-way-ssl-using-spring-boot
     // Currently this is secured by not mapping the path in the Zuul proxy and assuming the app will deployed behind a NAT gateway
-    @RequestMapping(value = "/{email}", method = RequestMethod.GET)
-    public ResponseEntity<Account> findAccount(@PathParam("email") String email) {
+    @RequestMapping(value = "/{base64Email}", method = RequestMethod.GET)
+    public ResponseEntity<Account> findAccount(@PathVariable("base64Email") String base64Email) {
+        String email = new String(Base64.decode(base64Email), Charset.forName("UTF-8"));
         Optional<Account> accountOptional = accountService.findByEmail(email);
         if (!accountOptional.isPresent()) {
             return ResponseEntity.notFound().build();

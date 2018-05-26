@@ -18,6 +18,9 @@ public class AccountService {
     }
 
     public Optional<Account> findByEmail(String email) {
+        if(email == null) {
+            return Optional.empty();
+        }
         return accountDao.findByEmail(email);
     }
 }

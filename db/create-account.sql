@@ -8,7 +8,8 @@ CREATE TABLE f_account (
   expired boolean DEFAULT false,
   enabled boolean DEFAULT false,
   locked boolean DEFAULT false,
-  grants varchar(200) NOT NULL
+  grants varchar(200) NOT NULL,
+  password varchar(200) NOT NULL
 );
 
 CREATE INDEX f_account_email ON f_account (email);
