@@ -1,6 +1,7 @@
 package nl.codebase.entities.account.signup;
 
 import nl.codebase.entities.account.AccountDao;
+import nl.codebase.entities.common.EncryptionUtil;
 import nl.codebase.entities.common.FaceterConstants;
 import nl.codebase.entities.common.account.Grants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,9 @@ public class SignUpService {
     public void signUp(SignUpForm signUpForm) {
         int companyId = companyDao.insert(signUpForm.getCompany());
         signUpForm.getAccount().setGrants(Grants.from(FaceterConstants.GRANT.COMPANY_USER));
-        accountDao.insert(signUpForm.getAccount(), companyId);
+        String salt = EncryptionUtil.getBase64Salt();
+        accountDao.insert(signUpForm.getAccount(), companyId, salt,
+                EncryptionUtil.generatePasswordHash(salt, signUpForm.getAccount().getPassword()));
     }
 
 

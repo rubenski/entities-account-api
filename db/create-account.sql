@@ -9,7 +9,8 @@ CREATE TABLE f_account (
   enabled boolean DEFAULT false,
   locked boolean DEFAULT false,
   grants varchar(200) NOT NULL,
-  password varchar(200) NOT NULL
+  password varchar(200) NOT NULL,
+  salt varchar(200) NOT NULL
 );
 
 CREATE INDEX f_account_email ON f_account (email);
