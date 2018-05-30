@@ -20,9 +20,10 @@ public class AccountService
         this.accountDao = accountDao;
     }
 
-    public Optional<Account> authenticate(String email, String password) {
-        if(StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
-            throw new IllegalArgumentException("Email and password cannot be empty");
+    // TODO: split of fetching of the actual account and authentication.
+    public Optional<Account> authenticate(String email, String suppliedPassword) {
+        if(StringUtils.isBlank(email) || StringUtils.isBlank(suppliedPassword)) {
+            throw new IllegalArgumentException("Email and suppliedPassword cannot be empty");
         }
         Optional<Account> accountOptional = accountDao.findByEmail(email);
         if(!accountOptional.isPresent()) {
@@ -31,12 +32,13 @@ public class AccountService
 
         Account account = accountOptional.get();
 
-        String suppliedPasswordHash = EncryptionUtil.generatePasswordHash(account.getSalt(), password);
-
+        String suppliedPasswordHash = EncryptionUtil.generatePasswordHash(account.getSalt(), suppliedPassword);
 
         if(!suppliedPasswordHash.equals(account.getPassword())) {
             return Optional.empty();
         }
+
+        account.clearPasswords();
 
         return Optional.of(account);
     }
