@@ -2,8 +2,7 @@ package nl.codebase.entities.account.signup;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.codebase.entities.common.account.Account;
-
+import nl.codebase.entities.account.AccountForm;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ public class SignUpForm {
 
     @Valid
     @NotNull
-    private Account account;
+    private AccountForm account;
 
     @Valid
     @NotNull

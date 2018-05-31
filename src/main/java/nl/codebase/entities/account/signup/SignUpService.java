@@ -14,6 +14,7 @@ public class SignUpService {
     private CompanyDao companyDao;
     private AccountDao accountDao;
 
+
     @Autowired
     public SignUpService(CompanyDao companyDao, AccountDao accountDao) {
         this.companyDao = companyDao;
@@ -27,12 +28,9 @@ public class SignUpService {
     @Transactional
     public void signUp(SignUpForm signUpForm) {
         int companyId = companyDao.insert(signUpForm.getCompany());
-        signUpForm.getAccount().setGrants(Grants.from(FaceterConstants.GRANT.COMPANY_USER));
         String salt = EncryptionUtil.getBase64Salt();
-        accountDao.insert(signUpForm.getAccount(), companyId, salt,
-                EncryptionUtil.generatePasswordHash(salt, signUpForm.getAccount().getPassword()));
+        String passwordHash = EncryptionUtil.generatePasswordHash(salt, signUpForm.getAccount().getPassword());
+        String grants = Grants.from(FaceterConstants.GRANT.COMPANY_USER).toString();
+        accountDao.insert(signUpForm.getAccount(), companyId, salt,passwordHash, grants);
     }
-
-
-
 }

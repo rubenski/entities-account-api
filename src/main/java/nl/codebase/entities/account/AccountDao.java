@@ -1,5 +1,6 @@
 package nl.codebase.entities.account;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import nl.codebase.entities.common.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class AccountDao extends JdbcDaoSupport {
     private final DataSource dataSource;
 
     private static final String SQL_FIND_ACCOUNT_BY_EMAIL = "SELECT * FROM f_account WHERE email = ?";
-    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, expired, " +
-            "enabled, locked, company_id, grants, password, salt) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT_ACCOUNT = "INSERT INTO f_account (firstName, lastName, email, phone, " +
+            "company_id, grants, password, salt) VALUES (?,?,?,?,?,?,?,?)";
 
     @Autowired
     public AccountDao(DataSource dataSource) {
@@ -55,19 +56,18 @@ public class AccountDao extends JdbcDaoSupport {
         });
     }
 
-    public void insert(Account account, int companyId, String salt, String password) {
+    public void insert(AccountForm account, int companyId, String salt, String password, String grants) {
         getJdbcTemplate().update(SQL_INSERT_ACCOUNT, preparedStatement -> {
             preparedStatement.setString(1, account.getFirstName());
             preparedStatement.setString(2, account.getLastName());
             preparedStatement.setString(3, account.getEmail());
             preparedStatement.setString(4, account.getPhone());
-            preparedStatement.setBoolean(5, account.isExpired());
-            preparedStatement.setBoolean(6, account.isEnabled());
-            preparedStatement.setBoolean(7, account.isLocked());
-            preparedStatement.setInt(8, companyId);
-            preparedStatement.setString(9, account.grantsToString());
-            preparedStatement.setString(10, password);
-            preparedStatement.setString(11, salt);
+            preparedStatement.setInt(5, companyId);
+            preparedStatement.setString(6, grants);
+            preparedStatement.setString(7, password);
+            preparedStatement.setString(8, salt);
         });
     }
+
+
 }
