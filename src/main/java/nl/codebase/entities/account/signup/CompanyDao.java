@@ -1,15 +1,11 @@
 package nl.codebase.entities.account.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Repository
 public class CompanyDao extends JdbcDaoSupport {
@@ -38,12 +34,9 @@ public class CompanyDao extends JdbcDaoSupport {
             preparedStatement.setString(5, company.getCommerceNumber());
             preparedStatement.setString(6, company.getCountry());
             preparedStatement.setString(7, company.getWebsite());
-        }, new ResultSetExtractor<Integer>() {
-            @Override
-            public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
-                rs.next();
-                return rs.getInt(1);
-            }
+        }, rs -> {
+            rs.next();
+            return rs.getInt(1);
         });
     }
 }

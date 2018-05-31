@@ -1,8 +1,6 @@
-package nl.codebase.entities.account;
+package nl.codebase.entities.account.account;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
-import nl.codebase.entities.common.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -32,31 +30,30 @@ public class AccountDao extends JdbcDaoSupport {
         setDataSource(dataSource);
     }
 
-    public Optional<Account> findByEmail(String email) {
+    public Optional<PersistedAccount> findByEmail(String email) {
         return getJdbcTemplate().query(SQL_FIND_ACCOUNT_BY_EMAIL, ps -> ps.setString(1, email), rs -> {
             if(!rs.next()) {
                 return Optional.empty();
             }
 
-            Account account = new Account();
-            account.setId(rs.getLong("id"));
-            account.setEmail(rs.getString("email"));
-            account.setEnabled(rs.getBoolean("enabled"));
-            account.setExpired(rs.getBoolean("expired"));
-            account.setFirstName(rs.getString("firstName"));
-            account.setLastName(rs.getString("lastName"));
-            account.setLocked(rs.getBoolean("locked"));
-            account.setPhone(rs.getString("phone"));
-            account.grantsFromString(rs.getString("grants"));
-            account.setPassword(rs.getString("password"));
-            account.setConfirmPassword(rs.getString("password"));
-            account.setSalt(rs.getString("salt"));
+            PersistedAccount persistedAccount = new PersistedAccount();
+            persistedAccount.getAccount().setId(rs.getLong("id"));
+            persistedAccount.getAccount().setEmail(rs.getString("email"));
+            persistedAccount.getAccount().setEnabled(rs.getBoolean("enabled"));
+            persistedAccount.getAccount().setExpired(rs.getBoolean("expired"));
+            persistedAccount.getAccount().setFirstName(rs.getString("firstName"));
+            persistedAccount.getAccount().setLastName(rs.getString("lastName"));
+            persistedAccount.getAccount().setLocked(rs.getBoolean("locked"));
+            persistedAccount.getAccount().setPhone(rs.getString("phone"));
+            persistedAccount.setGrantsFromString(rs.getString("grants"));
+            persistedAccount.setPassword(rs.getString("password"));
+            persistedAccount.setSalt(rs.getString("salt"));
 
-            return Optional.of(account);
+            return Optional.of(persistedAccount);
         });
     }
 
-    public void insert(AccountForm account, int companyId, String salt, String password, String grants) {
+    public void insert(CreateAccountForm account, int companyId, String salt, String password, String grants) {
         getJdbcTemplate().update(SQL_INSERT_ACCOUNT, preparedStatement -> {
             preparedStatement.setString(1, account.getFirstName());
             preparedStatement.setString(2, account.getLastName());

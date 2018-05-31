@@ -1,6 +1,6 @@
 package nl.codebase.entities.account.signup;
 
-import nl.codebase.entities.account.AccountDao;
+import nl.codebase.entities.account.account.AccountDao;
 import nl.codebase.entities.common.EncryptionUtil;
 import nl.codebase.entities.common.FaceterConstants;
 import nl.codebase.entities.common.account.Grants;
