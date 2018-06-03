@@ -45,7 +45,7 @@ public class AccountDao extends JdbcDaoSupport {
             persistedAccount.getAccount().setLastName(rs.getString("lastName"));
             persistedAccount.getAccount().setLocked(rs.getBoolean("locked"));
             persistedAccount.getAccount().setPhone(rs.getString("phone"));
-            persistedAccount.setGrantsFromString(rs.getString("grants"));
+            persistedAccount.getAccount().setGrantsFromString(rs.getString("grants"));
             persistedAccount.setPassword(rs.getString("password"));
             persistedAccount.setSalt(rs.getString("salt"));
 
